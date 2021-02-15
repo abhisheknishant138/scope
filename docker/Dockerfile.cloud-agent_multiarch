@@ -4,14 +4,13 @@ ARG SCOPE_SKIP_UI_ASSETS
 RUN apt-get update
 RUN apt-get install -y make file git wget gcc libpcap-dev time
 RUN if [ `uname -m` = "aarch64" ] ; then \
-       wget -q https://dl.google.com/go/go1.13.linux-arm64.tar.gz && \
-       tar -xf go1.13.linux-arm64.tar.gz && \
-       mv go /usr/local; \
+       ARCH = "arm64"; \
     else \
-       wget -q https://dl.google.com/go/go1.13.linux-amd64.tar.gz && \
-       tar -xf go1.13.linux-amd64.tar.gz && \
-       mv go /usr/local; \
+       ARCH = "amd64"; \
     fi
+RUN wget -q https://dl.google.com/go/go1.13.linux-$ARCH.tar.gz
+RUN tar -xf go1.13.linux-$ARCH.tar.gz
+RUN mv go /usr/local
 WORKDIR /root/go/src/github.com/weaveworks
 COPY / scope
 WORKDIR scope
