@@ -11,9 +11,6 @@ RUN if [ `uname -m` = "aarch64" ] ; then \
     wget -q https://dl.google.com/go/go1.13.linux-"${ARCH}".tar.gz && \
     tar -xf go1.13.linux-"${ARCH}".tar.gz && \
     mv go /usr/local
-RUN wget -q https://dl.google.com/go/go1.13.linux-$ARCH.tar.gz
-RUN tar -xf go1.13.linux-$ARCH.tar.gz
-RUN mv go /usr/local
 WORKDIR /root/go/src/github.com/weaveworks
 COPY / scope
 WORKDIR scope
